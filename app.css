@@ -1,0 +1,20 @@
+body {
+    margin: 50px 50px;
+    padding: 0px;
+    text-align: center;
+    box-align: center;
+    background: url(b.jpeg) no-repeat;
+    background-size: cover;
+}
+
+#form-container {
+    text-align: center;
+    box-align: center;
+    margin: 50px 50px;
+    padding: 0px;
+    display: flexbox;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    color: white;
+}

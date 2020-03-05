@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://localhost:3000/app.css" type="text/css">
+
+    <title>Visitor</title>
+</head>
+
+<body>
+    <div id="form-container">
+        <form action="/thank-you" method="POST">
+            <label for="Name">Name:</label><br>
+            <input type="text" id="Name" name="name" value=""><br><br>
+            <label for="Assistant">Assistant:</label><br>
+            <input type="text" id="Assistant" name="assistant" value=""><br><br>
+            <label for="Age">Age:</label><br>
+            <input type="age" id="Age" name="age" value=""><br><br>
+            <label for="Date">Date:</label><br>
+            <input type="date" id="Date" name="date" value=""><br><br>
+            <label for="Time">Time:</label><br>
+            <input type="time" id="Time" name="time" value=""><br><br>
+            <label for="Comments">Comments:</label><br>
+            <input type="textarea" style="width:300px; height:300px;" id="message" name="comments" value=""><br><br>
+            <input type="submit" value="Submit">
+            <input type="reset">
+        </form>
+    </div>
+</body>
+
+</html>
