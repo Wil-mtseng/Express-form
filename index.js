@@ -16,7 +16,7 @@ const pool = new Pool({
 
 pool.connect((err, res) => {
     if (err) {
-        console.log('Portia wa spita', err);
+        console.log('Something went wrong :(', err);
     }
 });
 
@@ -45,45 +45,56 @@ app.get('/new-visitor', (req, res) => {
 });
 
 // create a new Visitor in the database
-app.get('/addNewVisitor', (req, res) => {
+app.post('/addNewVisitor', (req, res) => {
     addNewVisitor("Wilfred", "Mr Ratala", "73", "11/11/11", "00:01", "I am Wil");
-    res.json({
+    res.status(200).json({
         message: "Visitor added to the database"
     });
 });
 
 // delete a single Visitor from the database by ID
-app.get('/deleteAVisitor', (req, res) => {
+app.delete('/deleteAVisitor', (req, res) => {
     deleteAVisitor(9);
-    res.json({
-        message: "Visitor deleted"
+    res.status(200).json({
+        message: `Visitor deleted`
     });
 });
 
 
-// delete all Visitors(Fix "cannot get /" bug)
+// delete all Visitors
 app.delete('/deleteAllVisitors', (req, res) => {
     deleteAllVisitors();
+    res.status(200).json({
+        message: "All visitors deleted!"
+    });
 
 });
 
 
-//view all Visitors (Fix "2 params but none supp" bug)
-app.get('/listAllVisitor', (req, res) => {
-    let id, visitorname;
-    listAllVisitor("id", "visitorname");
+//view all Visitors 
+app.get('/listAllVisitor', async(req, res) => {
 
+    // let visitors = listAllVisitor();
+    let view = await pool.query(`SELECT * FROM visitors`)
+    res.status(200).send(view.rows);
+    res.end();
 });
 
 
 // view a single Visitor
-app.get('/viewVisitor', (req, res) => {
-    viewVisitor(12);
+app.get('/viewVisitor:id', async(req, res) => {
+    view = await pool.query(`SELECT * FROM visitors WHERE id =${req.params.id}`)
+        // sends jason object to postman
+    res.status(200).send(view.rows);
+    res.end();
+
 });
 
-// Update a single Visitor
-app.get('/updateVisitor:id', () => {
-    updateVisitor("Wilfred", "Mr Ratala", "73", "11/11/11", );
+// Update a single Visitor(fix column doesn't exist)
+app.patch('/updateVisitor:id', async(req, res) => {
+    update = await updateVisitor();
+
+    res.send(update)
 });
 
 
