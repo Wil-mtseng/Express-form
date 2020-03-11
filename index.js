@@ -2,7 +2,6 @@ const { addNewVisitor, listAllVisitor, viewVisitor, deleteAVisitor, updateVisito
 const express = require('express');
 const path = require('path');
 
-
 const app = express();
 
 app.use('/', express.static('.'))
@@ -38,7 +37,6 @@ app.delete('/deleteVisitor:id', async(req, res) => {
 
 // delete all Visitors
 app.delete('/deleteAllVisitors', async(req, res) => {
-
     removeAll = await deleteAllVisitors();
     res.status(200).send(removeAll.rows);
 
