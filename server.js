@@ -43,7 +43,7 @@ const addNewVisitor = async(visitorname, assistant, age, dateofvisit, timeofvisi
 const listAllVisitor = async(id, visitorname) => {
     let query, view, values;
 
-    view = `SELECT * FROM visitors`
+    view = `SELECT visitors FROM visitors ORDER BY $1, $2`
     values = [id, visitorname]
 
     try {
@@ -74,7 +74,7 @@ const viewVisitor = async(id) => {
         query = await pool.query(view, values);
 
         console.log(query.rows);
-        return query.rows;
+        return query;
 
     } catch (e) {
 
@@ -111,12 +111,12 @@ const deleteAVisitor = async(id) => {
 
 
 // Select and update a visitor using their ID
-const updateVisitor = async(visitorname, dateofvisit, timeofvisit, assistant, comments) => {
+const updateVisitor = async(visitorname, assistant, age, dateofvisit, timeofvisit, comments, id) => {
 
     let update, values, query;
 
-    update = `UPDATE visitors SET visitorname = $1, dateofvisit = $2, timeofvisit = $3, assistant = $4, comments = $5  WHERE id = 10 RETURNING*`
-    values = [visitorname, dateofvisit, timeofvisit, assistant, comments]
+    update = `UPDATE visitors SET visitorname = $1, assistant = $2, age = $3,dateofvisit = $4, timeofvisit = $5, comments = $6 WHERE id = $7 RETURNING*`
+    values = [visitorname, assistant, age, dateofvisit, timeofvisit, comments, id]
 
     try {
 
@@ -140,7 +140,7 @@ const deleteAllVisitors = async() => {
 
     let remove, query;
 
-    remove = 'DELETE * FROM visitors';
+    remove = 'DELETE FROM visitors';
 
     try {
 
