@@ -1,29 +1,9 @@
 const { addNewVisitor, listAllVisitor, viewVisitor, deleteAVisitor, updateVisitor, deleteAllVisitors } = require("./server")
 const express = require('express');
-const { Pool } = require('pg');
 const path = require('path');
 
 
 const app = express();
-
-const pool = new Pool({
-    user: 'user',
-    host: 'localhost',
-    database: 'db',
-    password: 'pass',
-    port: 5432
-});
-
-pool.connect((err, res) => {
-    if (err) {
-        console.log('Something went wrong :(', err);
-    }
-});
-
-// Error Handler 
-pool.on('error', (err) => {
-    console.error('An idle client has experienced an error', err.stack)
-})
 
 app.use('/', express.static('.'))
 
